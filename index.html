@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Quicksand:wght@300..700&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="icon" href="https://colegiosatelite.com.br/wp-content/uploads/2021/05/icon-1.png" sizes="192x192">
+    <link rel="icon" href="https://colegiosatelite.com.br/wp-content/uploads/2021/05/icon-1.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="https://colegiosatelite.com.br/wp-content/uploads/2021/05/icon-1.png">
+    <title>Central TI</title>
+</head>
+<body> 
+    <iframe src="html/header.html" onload="this.insertAdjacentHTML('afterend', (this.contentDocument.body||this.contentDocument).innerHTML);this.remove()"></iframe>
+
+    <div class="container">
+
+        <aside>
+        
+        </aside>
+    
+        <main>
+            
+            <section id="login" class="auth-buttons">
+                <button id="authorize_button" onclick="authorizeForm(onLogin, onLoginError)">Login</button>
+                <button id="signout_button" onclick="handleSignoutClick(onLogout)" hidden>Logout</button>
+            </section>
+    
+            <div id="content"></div>
+
+        </main>
+
+    </div>
+
+    <iframe src="html/footer.html" onload="this.insertAdjacentHTML('afterend', (this.contentDocument.body||this.contentDocument).innerHTML);this.remove()"></iframe>
+
+    <script type="text/javascript" src="script/auth.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+    <script type="text/javascript" src="script/inicio.js"></script>
+</body>
+</html>
