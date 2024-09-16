@@ -1,5 +1,17 @@
 /* || Estilo geral */
 
+@font-face {
+    font-family: 'Silkscreen';
+    src: url(./fonts/slkscr.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Silkscreen';
+    src: url(./fonts/slkscrb.ttf);
+    font-weight: bold;
+}
+
 :root {
     --main: #000080;
     --foreground: #232D3F;
@@ -18,7 +30,7 @@
     outline: none;
     text-decoration: none;
     list-style: none;
-    font-family: 'Space Grotesk';
+    font-family: 'Silkscreen';
 }
 
 body {
@@ -40,31 +52,36 @@ header {
     margin: 0;
     flex-basis: 50px;
     flex: 2;
-    font-family: 'Jersey 10';
+    font-family: 'Public Pixel', sans-serif;
+    padding: 10px;
 
-    border-bottom: var(--accent) solid 2px;
+    border-bottom: var(--accent) solid 4px;
 }
 
 header h1 {
     color: var(--title);
-    font-family: 'Jersey 10';
+    font-family: 'Silkscreen';
     text-shadow: 0 0 14px var(--highlight);
     margin-left: 20px;
-    font-size: 3rem;
+    font-size: 3.5rem;
 }
 
 header nav {
     margin-right: 20px;
     display: flex;
-    gap: 18px;
-    font-size: 1.3rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 header nav a {
     color: var(--accent);
     transition: text-shadow 0.2s ease-out, color 0.2s ease-out;
-    font-family: 'Jersey 10';
-    font-size: 2rem;
+    font-family: 'Silkscreen';
+    font-size: 1.8rem;
+    margin: 10px;
+    margin-bottom: 0;
 }
 
 header nav a:hover {
@@ -79,7 +96,6 @@ header nav a:hover {
     align-items: center;
     overflow-y: auto;
     flex: 14;
-    gap: 10px;
 }
 
 main {
@@ -87,19 +103,18 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow-y: auto;
     gap: 20px;
     flex: 7;
 }
 
 h2 {
-    font-family: 'Jersey 10', sans-serif;
+    font-family: 'Silkscreen';
     font-size: 2.5rem;
     color: var(--accent);
 }
 
 h3 {
-    font-family: 'Jersey 10', sans-serif;
+    font-family: 'Silkscreen';
     font-size: 1.7rem;
     color: var(--accent);
 }
@@ -108,18 +123,42 @@ h3 {
     display: flex;
     gap: 10px;
     flex-direction: column;
-    overflow-y: auto;
 }
 
 #content section {
     padding: 10px;
-    border: var(--accent) solid 2px;
+    border: var(--accent) solid 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 #content section p {
-    font-family: 'Jersey 10', sans-serif;
+    font-family: 'Silkscreen';
     font-size: 1.3rem;
     color: var(--accent);
+}
+
+#content section button {
+    padding: 10px;
+    font-size: 2rem;
+    background: none;
+    color: var(--accent);
+    border: var(--accent) solid 4px;
+    font-family: 'Silkscreen';
+    transition: border 0.2s ease-in-out, color 0.2s ease-in-out, text-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+#content section button:hover {
+    text-shadow: 0 0 15px var(--highlight);
+    color: var(--title);
+    border: var(--title) solid 4px;
+    box-shadow: 0 0 15px var(--highlight);
 }
 
 aside {
@@ -129,7 +168,6 @@ aside {
     align-items: center;
     overflow-y: auto;
     gap: 20px;
-    flex: 1;
 }
 
 .auth-buttons {
@@ -143,15 +181,15 @@ aside {
     font-size: 2rem;
     background: none;
     color: var(--accent);
-    border: var(--accent) solid 2px;
-    font-family: 'Jersey 10', sans-serif;
+    border: var(--accent) solid 4px;
+    font-family: 'Silkscreen';
     transition: border 0.2s ease-in-out, color 0.2s ease-in-out, text-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .auth-buttons button:hover {
     text-shadow: 0 0 15px var(--highlight);
     color: var(--title);
-    border: var(--title) solid 2px;
+    border: var(--title) solid 4px;
     box-shadow: 0 0 15px var(--highlight);
 }
 
@@ -160,14 +198,15 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-top: var(--accent) solid 2px;
+    border-top: var(--accent) solid 4px;
     color: var(--accent);
     flex-basis: 50px;
+    padding: 10px;
     flex: 1;
 }
 
 footer p {
-    font-family: 'Jersey 10';
+    font-family: 'Silkscreen';
     font-size: 1.4rem;
     text-align: center;
 }
@@ -175,7 +214,7 @@ footer p {
 footer a {
     color: var(--accent);
     transition: text-shadow 0.2s ease-out, color 0.2s ease-out;
-    font-family: 'Jersey 10';
+    font-family: 'Silkscreen';
 }
 
 footer a:hover {
@@ -183,7 +222,7 @@ footer a:hover {
     text-shadow: 0 0 14px var(--highlight);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1068px) {
     header {
         display: flex;
         flex-direction: column;
@@ -193,9 +232,9 @@ footer a:hover {
         margin: 0;
         flex-basis: 50px;
         flex: 2;
-        font-family: 'Jersey 10';
+        font-family: 'Silkscreen';
     
-        border-bottom: var(--accent) solid 2px;
+        border-bottom: var(--accent) solid 4px;
     }
 
     header h1 {
@@ -206,5 +245,29 @@ footer a:hover {
 
     header nav {
         margin: 0;
+    }
+}
+
+@media (max-width: 612px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    header nav a {
+        font-size: 1rem;
+    }
+
+    .auth-buttons button {
+        padding: 5px;
+        font-size: 1.5rem;
+        background: none;
+        color: var(--accent);
+        border: var(--accent) solid 4px;
+        font-family: 'Silkscreen';
+        transition: border 0.2s ease-in-out, color 0.2s ease-in-out, text-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    footer p {
+        font-size: 0.7rem;
     }
 }

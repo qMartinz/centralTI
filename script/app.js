@@ -20,16 +20,21 @@ function welcome(){
             resourceName: "people/me",
             personFields: "names"
         }).then((response) => {
-            document.getElementById('user').textContent = `Olá, ${response.result.names[0].givenName}!`;
+            document.getElementById('user').textContent = `Ola, ${response.result.names[0].givenName}!`;
         }, (error) => {
             console.error('Error on info get', error);
         });
     });
 
-    document.getElementById('date').textContent = `Hoje é ${new Date().toLocaleDateString('pt-BR', {
+    document.getElementById('date').textContent = `Hoje e ${new Date().toLocaleDateString('pt-BR', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-      })}!`;
+      })}.`;
+}
+
+function changeContent(src) {
+    var content = document.getElementById('content');
+    content.innerHTML = `<iframe src="${src}" onload="this.insertAdjacentHTML('afterend', (this.contentDocument.body||this.contentDocument).innerHTML);this.remove();"></iframe>`;
 }
