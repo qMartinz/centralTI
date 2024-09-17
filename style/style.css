@@ -1,24 +1,30 @@
 /* || Estilo geral */
 
 @font-face {
-    font-family: 'Silkscreen';
-    src: url(./fonts/slkscr.ttf);
+    font-family: 'Command';
+    src: url(./fonts/retro.ttf);
     font-weight: normal;
 }
 
 @font-face {
-    font-family: 'Silkscreen';
-    src: url(./fonts/slkscrb.ttf);
+    font-family: 'Command';
+    src: url(./fonts/retro.ttf);
     font-weight: bold;
 }
 
 :root {
-    --main: #000080;
-    --foreground: #232D3F;
-    --title: #FFFFFF;
-    --text: #6e747e;
-    --accent: #cecece;
-    --highlight: #70e2ff;
+    --black: #0c0c0c;
+    --bright-white: #f2f2f2;
+    --white: #cccccc;
+    --cyan: #3a96dd;
+    --bright-red: #e3414f;
+    --red: #c50f1f;
+    --bright-yellow: #f9f1a5;
+    --yellow: #c19c00;
+    --bright-green: #16c20c;
+    --green: #13a10e;
+    --purple: #881798;
+    --blue: #0037da;
 }
 
 * {
@@ -30,7 +36,7 @@
     outline: none;
     text-decoration: none;
     list-style: none;
-    font-family: 'Silkscreen';
+    font-family: 'Command';
 }
 
 body {
@@ -40,53 +46,51 @@ body {
     overflow-y: auto;
     align-items: stretch;
 
-    background: var(--main);
-    color: var(--text);
+    background: var(--black);
+    color: var(--white);
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--highlight);
+    color: var(--bright-white);
     margin: 0;
     flex-basis: 50px;
     flex: 2;
     font-family: 'Public Pixel', sans-serif;
     padding: 10px;
 
-    border-bottom: var(--accent) solid 4px;
+    border-bottom: var(--white) solid 4px;
 }
 
 header h1 {
-    color: var(--title);
-    font-family: 'Silkscreen';
-    text-shadow: 0 0 14px var(--highlight);
-    margin-left: 20px;
+    color: var(--bright-text);
+    font-family: 'Command';
+    text-shadow: 0 0 14px var(--cyan);
     font-size: 3.5rem;
 }
 
 header nav {
-    margin-right: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    gap: 15px;
+    row-gap: 0px;
 }
 
 header nav a {
-    color: var(--accent);
+    color: var(--white);
     transition: text-shadow 0.2s ease-out, color 0.2s ease-out;
-    font-family: 'Silkscreen';
+    font-family: 'Command';
     font-size: 1.8rem;
-    margin: 10px;
-    margin-bottom: 0;
 }
 
 header nav a:hover {
-    color: var(--title);
-    text-shadow: 0 0 14px var(--highlight);
+    color: var(--bright-text);
+    text-shadow: 0 0 14px var(--cyan);
 }
 
 .container {
@@ -108,26 +112,28 @@ main {
 }
 
 h2 {
-    font-family: 'Silkscreen';
+    font-family: 'Command';
     font-size: 2.5rem;
-    color: var(--accent);
+    color: var(--white);
 }
 
 h3 {
-    font-family: 'Silkscreen';
+    font-family: 'Command';
     font-size: 1.7rem;
-    color: var(--accent);
+    color: var(--white);
 }
 
 #content {
     display: flex;
     gap: 10px;
     flex-direction: column;
+    overflow-y: auto;
+    max-height: 50vh;
 }
 
 #content section {
     padding: 10px;
-    border: var(--accent) solid 4px;
+    border: var(--white) solid 4px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -135,30 +141,30 @@ h3 {
     gap: 20px;
 
     max-height: 70vh;
-    overflow-y: auto;
 }
 
-#content section p {
-    font-family: 'Silkscreen';
+#content section .text {
+    font-family: 'Command';
     font-size: 1.3rem;
-    color: var(--accent);
+    color: var(--white);
 }
 
 #content section button {
     padding: 10px;
     font-size: 2rem;
     background: none;
-    color: var(--accent);
-    border: var(--accent) solid 4px;
-    font-family: 'Silkscreen';
+    color: var(--white);
+    border: var(--white) solid 4px;
+    font-family: 'Command';
+    cursor: pointer;
     transition: border 0.2s ease-in-out, color 0.2s ease-in-out, text-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 #content section button:hover {
-    text-shadow: 0 0 15px var(--highlight);
-    color: var(--title);
-    border: var(--title) solid 4px;
-    box-shadow: 0 0 15px var(--highlight);
+    text-shadow: 0 0 15px var(--cyan);
+    color: var(--bright-white);
+    border: var(--bright-white) solid 4px;
+    box-shadow: 0 0 15px var(--cyan);
 }
 
 aside {
@@ -180,17 +186,18 @@ aside {
     padding: 10px;
     font-size: 2rem;
     background: none;
-    color: var(--accent);
-    border: var(--accent) solid 4px;
-    font-family: 'Silkscreen';
+    color: var(--white);
+    border: var(--white) solid 4px;
+    font-family: 'Command';
+    cursor: pointer;
     transition: border 0.2s ease-in-out, color 0.2s ease-in-out, text-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .auth-buttons button:hover {
-    text-shadow: 0 0 15px var(--highlight);
-    color: var(--title);
-    border: var(--title) solid 4px;
-    box-shadow: 0 0 15px var(--highlight);
+    text-shadow: 0 0 15px var(--cyan);
+    color: var(--bright-white);
+    border: var(--bright-white) solid 4px;
+    box-shadow: 0 0 15px var(--cyan);
 }
 
 footer {
@@ -198,28 +205,28 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-top: var(--accent) solid 4px;
-    color: var(--accent);
+    border-top: var(--white) solid 4px;
+    color: var(--white);
     flex-basis: 50px;
     padding: 10px;
     flex: 1;
 }
 
 footer p {
-    font-family: 'Silkscreen';
+    font-family: 'Command';
     font-size: 1.4rem;
     text-align: center;
 }
 
 footer a {
-    color: var(--accent);
+    color: var(--white);
     transition: text-shadow 0.2s ease-out, color 0.2s ease-out;
-    font-family: 'Silkscreen';
+    font-family: 'Command';
 }
 
 footer a:hover {
-    color: var(--title);
-    text-shadow: 0 0 14px var(--highlight);
+    color: var(--bright-white);
+    text-shadow: 0 0 14px var(--cyan);
 }
 
 @media (max-width: 1068px) {
@@ -228,13 +235,13 @@ footer a:hover {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        color: var(--highlight);
+        color: var(--cyan);
         margin: 0;
         flex-basis: 50px;
         flex: 2;
-        font-family: 'Silkscreen';
+        font-family: 'Command';
     
-        border-bottom: var(--accent) solid 4px;
+        border-bottom: var(--white) solid 4px;
     }
 
     header h1 {
@@ -261,9 +268,9 @@ footer a:hover {
         padding: 5px;
         font-size: 1.5rem;
         background: none;
-        color: var(--accent);
-        border: var(--accent) solid 4px;
-        font-family: 'Silkscreen';
+        color: var(--white);
+        border: var(--white) solid 4px;
+        font-family: 'Command';
         transition: border 0.2s ease-in-out, color 0.2s ease-in-out, text-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     }
 

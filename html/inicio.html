@@ -1,9 +1,47 @@
 <section>
     <h2 id="user"></h2>
-    <p id="date"></p>
-    <p>E muito bom ter voce de volta.</p>
+    <p id="date" class="text"></p>
+    <p class="text">É muito bom ter você de volta.</p>
 </section>
 
 <section>
-    <p>Kanban aqui!</p>
+    <button onclick="changeContent('../html/tarefas.html')">Tarefas</button>
+
+    <div class="task-container">
+        <div class="task" status="0" priority="2">
+            <p class="task-status">A fazer</p>
+            <p class="task-title">Título da tarefa</p>
+            <p class="task-description">Descrição da tarefa</p>
+            <p class="task-priority">Prioridade: Alta</p>
+        </div>
+
+        <div class="task" status="0" priority="2">
+            <p class="task-status">A fazer</p>
+            <p class="task-title">Título da tarefa</p>
+            <p class="task-description">Descrição da tarefa</p>
+            <p class="task-priority">Prioridade: Alta</p>
+        </div>
+
+        <div class="task" status="0" priority="1">
+            <p class="task-status">A fazer</p>
+            <p class="task-title">Título da tarefa</p>
+            <p class="task-description">Descrição da tarefa</p>
+            <p class="task-priority">Prioridade: Média</p>
+        </div>
+
+        <div class="task" status="1" priority="1">
+            <p class="task-status">Em andamento</p>
+            <p class="task-title">Título da tarefa</p>
+            <p class="task-description">Descrição da tarefa</p>
+            <p class="task-priority">Prioridade: Média</p>
+        </div>
+
+        <div class="task" status="1" priority="0">
+            <p class="task-status">Em andamento</p>
+            <p class="task-title">Título da tarefa</p>
+            <p class="task-description">Descrição da tarefa</p>
+            <p class="task-priority">Prioridade: Baixa</p>
+        </div>
+    </div>
+    
 </section>

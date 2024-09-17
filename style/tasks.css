@@ -1,0 +1,76 @@
+.task-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.task {
+    border: var(--white) solid 4px;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.task:hover {
+    border: var(--bright-white) solid 4px;
+    box-shadow: 0 0 10px var(--cyan);
+}
+
+p.task-status {
+    margin-bottom: 10px;
+}
+
+.task[status="0"] p.task-status {
+    font-size: 1rem;
+    color: var(--bright-red);
+}
+
+.task[status="1"] p.task-status {
+    font-size: 1rem;
+    color: var(--bright-yellow);
+}
+
+.task[status="2"] p.task-status {
+    font-size: 1rem;
+    color: var(--bright-green);
+}
+
+p.task-title {
+    font-size: 1.3rem;
+    color: var(--white);
+}
+
+p.task-description {
+    font-size: 1rem;
+    color: var(--white);
+}
+
+p.task-priority {
+    margin-top: 10px;
+}
+
+.task[priority="0"] p.task-priority {
+    font-size: 1rem;
+    color: var(--green);
+}
+
+.task[priority="1"] p.task-priority {
+    font-size: 1rem;
+    color: var(--yellow);
+}
+
+.task[priority="2"] p.task-priority {
+    font-size: 1rem;
+    color: var(--red);
+}
+
+.task-kanban {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.task-kanban section {
+
+}
