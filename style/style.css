@@ -131,7 +131,7 @@ h3 {
     max-height: 50vh;
 }
 
-#content section {
+.content-container {
     padding: 10px;
     border: var(--white) solid 4px;
     display: flex;

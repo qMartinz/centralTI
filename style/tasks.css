@@ -7,14 +7,18 @@
 .task {
     border: var(--white) solid 4px;
     padding: 10px;
-    cursor: pointer;
+    cursor: move;
     user-select: none;
-    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .task:hover {
     border: var(--bright-white) solid 4px;
     box-shadow: 0 0 10px var(--cyan);
+}
+
+.task[drag-active=true] {
+    opacity: 0.3;
 }
 
 p.task-status {
@@ -69,8 +73,54 @@ p.task-priority {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
+    height: 100%;
+    padding: 10px;
 }
 
-.task-kanban section {
+.board {
+    padding: 10px;
+    border: var(--white) solid 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    min-height: 450px;
+}
 
+.board[drop-active=true]{
+    border: var(--bright-white) solid 4px;
+    box-shadow: 0 0 10px var(--cyan);
+}
+
+.board-status {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.task-kanban section[status="0"] .board-status {
+    color: var(--bright-red);
+}
+
+.task-kanban section[status="1"] .board-status {
+    color: var(--bright-yellow);
+}
+
+.task-kanban section[status="2"] .board-status {
+    color: var(--bright-green);
+}
+
+.task-kanban section[status="0"] p.task-status {
+    font-size: 1rem;
+    color: var(--bright-red);
+}
+
+.task-kanban section[status="1"] p.task-status {
+    font-size: 1rem;
+    color: var(--bright-yellow);
+}
+
+.task-kanban section[status="2"] p.task-status {
+    font-size: 1rem;
+    color: var(--bright-green);
 }

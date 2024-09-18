@@ -1,14 +1,22 @@
 <div class="task-kanban">
 
-    <section class="board" status="0">
+    <section class="board" ondrop="dropTask(event)" ondragover="allowDrop(event)" ondragenter="enterDropZone(event)" ondragleave="leaveDropZone(event)" status="0">
         <p class="board-status">A fazer</p>
+
+        <div id="task-0" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" class="task" priority="0">
+            <p class="task-status">A fazer</p>
+            <p class="task-title">Título da tarefa</p>
+            <p class="task-description">Descrição da tarefa</p>
+            <p class="task-priority">Prioridade: Alta</p>
+        </div>
+
     </section>
 
-    <section class="board" status="1">
+    <section class="board" ondrop="dropTask(event)" ondragover="allowDrop(event)" ondragenter="enterDropZone(event)" ondragleave="leaveDropZone(event)" status="1">
         <p class="board-status">Em andamento</p>
     </section>
 
-    <section class="board" status="2">
+    <section class="board" ondrop="dropTask(event)" ondragover="allowDrop(event)" ondragenter="enterDropZone(event)" ondragleave="leaveDropZone(event)" status="2">
         <p class="board-status">Concluído</p>
     </section>
 
