@@ -70,8 +70,7 @@ p.task-priority {
 }
 
 .task-kanban {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
     gap: 20px;
     height: 100%;
     padding: 10px;
@@ -84,8 +83,9 @@ p.task-priority {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    flex: 1 1 0px;
+    flex-basis: 100%;
     gap: 20px;
-    min-height: 450px;
 }
 
 .board[drop-active=true]{

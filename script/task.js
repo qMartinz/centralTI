@@ -25,7 +25,6 @@ function dropTask(ev) {
   ev.target.removeAttribute("drop-active");
   document.querySelectorAll('.task').forEach(task => task.style.pointerEvents = 'all');
 
-  document.getElementById(data).querySelector('.task-status').textContent = ev.target.querySelector('.board-status').textContent;
   document.getElementById(data).removeAttribute("drag-active");
 }
 

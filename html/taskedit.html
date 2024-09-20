@@ -1,0 +1,42 @@
+<div class="overlay-container">
+    <div class="overlay task-edit">
+        <div class="title-container">
+
+        </div>
+
+        <div class="priority-container">
+
+        </div>
+
+        <div class="description-container">
+            <div class="description">
+                <div class="markeddown hide-on-edit">
+
+                </div>
+
+                <div class="fake-text-area hide-on-edit">
+                    <p>Adicione uma descrição à tarefa...</p>
+                </div>
+
+                <div class="description-edit">
+                    <div class="editor-content" contenteditable="true">
+                        <p>
+                            <span class="placeholder" contenteditable="false">Adicionar descrição aaaaa</span>
+                        </p>
+                    </div>
+                    <button onclick="editSave(event)">Salvar</button>
+                    <button onclick="editCancel(event)">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function editSave(e){
+        document.querySelector('.markeddown').innerHTML = document.querySelector('.editor-content').innerHTML;
+    }
+
+    function editCancel(e){
+        document.querySelector('.editor-content').innerHTML = document.querySelector('.markeddown').innerHTML;
+    }
+</script>
