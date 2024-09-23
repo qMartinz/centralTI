@@ -10,33 +10,92 @@
 
         <div class="description-container">
             <div class="description">
-                <div class="markeddown hide-on-edit">
+                <div class="markeddown hide-on-edit"></div>
 
-                </div>
-
-                <div class="fake-text-area hide-on-edit">
-                    <p>Adicione uma descrição à tarefa...</p>
-                </div>
+                <a class="fake-text-area hide-on-edit" href="#">
+                    Adicione uma descrição à tarefa...
+                </a>
 
                 <div class="description-edit">
-                    <div class="editor-content" contenteditable="true">
-                        <p>
-                            <span class="placeholder" contenteditable="false">Adicionar descrição aaaaa</span>
-                        </p>
+                    <div class="edit-content"
+                        aria-label="Área de conteúdo principal, comece a digitar para inserir texto."
+                        aria-multiline="true" role="textbox" id="editor-textarea" contenteditable="true" translate="no">
+                        <p><span data-testid="placeholder-test-id" class="placeholder-decoration"
+                                contenteditable="false">Use atalhos de Marcação para formatar sua página enquanto
+                                digita, como * para listas, # para cabeçalhos e --- para uma regra
+                                horizontal.</span><br></p>
                     </div>
-                    <button onclick="editSave(event)">Salvar</button>
-                    <button onclick="editCancel(event)">Cancelar</button>
+                    <button onclick="editSave(event)" id="save-edit">Salvar</button>
+                    <button onclick="editCancel(event)" id="cancel-edit">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script>
-    function editSave(e){
-        document.querySelector('.markeddown').innerHTML = document.querySelector('.editor-content').innerHTML;
+    
+    let description = document.querySelector('.markeddown');
+    let textarea = document.querySelector('.fake-text-area');
+    let edit = document.querySelector('.description-edit');
+    let edittextarea = document.getElementById('editor-textarea');
+    let btnsave = document.getElementById('save-edit');
+    let btncancel = document.getElementById('cancel-edit');
+
+    const emptyeditarea = `<p><span data-testid="placeholder-test-id" class="placeholder-decoration"
+                                contenteditable="false">Use atalhos de Marcação para formatar sua página enquanto
+                                digita, como * para listas, # para cabeçalhos e --- para uma regra
+                                horizontal.</span><br></p>`
+
+    edit.style.visibility = "hidden";
+
+    if (description.textContent === "") {
+        description.style.visibility = "hidden";
+        textarea.style.visibility = "visible";
+    } else {
+        description.style.visibility = "visible";
+        textarea.style.visibility = "hidden";
     }
 
-    function editCancel(e){
-        document.querySelector('.editor-content').innerHTML = document.querySelector('.markeddown').innerHTML;
+    textarea.addEventListener('click', function(e) {
+        e.preventDefault();
+        textarea.style.visibility = "hidden";
+        description.style.visibility = "hidden";
+        edit.style.visibility = "visible";
+    });
+
+    description.addEventListener('click', function(e) {
+        e.preventDefault();
+        textarea.style.visibility = "hidden";
+        description.style.visibility = "hidden";
+        edit.style.visibility = "visible";
+    });
+
+    edittextarea.addEventListener('')
+
+    function editSave(e) {
+        description.innerHTML = edittextarea.innerHTML;
+        textarea.style.visibility = "visible";
+        edit.style.visibility = "hidden";
+
+        if (description.innerHTML !== ``) {
+            description.style.visibility = "visible";
+            textarea.style.visibility = "hidden";
+        }
+
+        if (description.innerHTML === ``){
+            edittextarea.innerHTML = emptyeditarea;
+        } else {
+            edittextarea.innerHTML = description.innerHTML;
+        }
+    }
+
+    function editCancel(e) {
+        if (description.innerHTML === ``){
+            edittextarea.innerHTML = emptyeditarea;
+        } else {
+            edittextarea.innerHTML = description.innerHTML;
+        }
+        textarea.style.visibility = "visible";
+        edit.style.visibility = "hidden";
     }
 </script>
