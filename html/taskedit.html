@@ -1,29 +1,72 @@
-<div class="overlay-container">
-    <div class="overlay task-edit">
-        <div class="title-container">
+<head>
+    <link rel="stylesheet" href="../style/multiselect.css">
+    <style>
+        .edit-content:has(p:only-child > br)::before {
+            content: "Use atalhos de Marcação para formatar sua página enquanto digita, como * para listas, # para cabeçalhos e --- para uma regra horizontal.";
+            pointer-events: none;
+            user-select: none;
+        }
 
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<div class="overlay-container" id="edit-container">
+    <div class="overlay task-edit" task-id="" id="task-edit">
+        <button onclick="closeTaskEdit()">X</button>
+
+        <div class="title-container">
+            <h3 id="task-title" class="task-title">Tarefa 1</h3>
+            <h3 class="title-edit" id="title-edit" contenteditable="true"></h3>
+            <div class="custom-select">
+                <select name="status" id="status">
+                    <option value="null">Status inválido</option>
+                    <option value="0">A fazer</option>
+                    <option value="1">Em andamento</option>
+                    <option value="2">Concluído</option>
+                </select>
+            </div>
         </div>
 
         <div class="priority-container">
-
+            <div class="custom-select">
+                <select name="priority" id="priority">
+                    <option value="null">Prioridade inválida</option>
+                    <option value="0">Alta</option>
+                    <option value="1">Média</option>
+                    <option value="2">Baixa</option>
+                </select>
+            </div>
+            <label for="assigned">Responsáveis</label>
+            <select id="assigned" name="assigned" data-placeholder="Select assigned" multiple data-multi-select>
+                <option value="105688030906263974529">Gustavo Martinez</option>
+                <option value="105688030906263974528">Gustavo Martinez 2</option>
+            </select>
         </div>
 
         <div class="description-container">
             <div class="description">
-                <div class="markeddown hide-on-edit"></div>
+                <div id="description" class="markeddown hide-on-edit"></div>
 
                 <a class="fake-text-area hide-on-edit" href="#">
                     Adicione uma descrição à tarefa...
                 </a>
 
-                <div class="description-edit">
+                <div class="description-edit" id="description-edit">
+                    <button class="bold" onclick="document.execCommand('bold');">B</button>
+                    <button class="italic" onclick="document.execCommand('italic')">I</button>
+                    <button class="strikeThrough" onclick="document.execCommand('strikeThrough')">S</button>
+                    <button class="underline" onclick="document.execCommand('underline')">U</button>
+                    <button class="sub-super-script" onclick="document.execCommand('subscript')">X<sub>2</sub></button>
+                    <button class="sub-super-script"
+                        onclick="document.execCommand('superscript')">X<sup>2</sup></button>
+                    <button class="unordered-list" onclick="document.execCommand('insertUnorderedList')">&bull;</button>
+                    <button class="ordered-list" onclick="document.execCommand('insertOrderedList')">1.</button>
                     <div class="edit-content"
                         aria-label="Área de conteúdo principal, comece a digitar para inserir texto."
                         aria-multiline="true" role="textbox" id="editor-textarea" contenteditable="true" translate="no">
-                        <p><span data-testid="placeholder-test-id" class="placeholder-decoration"
-                                contenteditable="false">Use atalhos de Marcação para formatar sua página enquanto
-                                digita, como * para listas, # para cabeçalhos e --- para uma regra
-                                horizontal.</span><br></p>
+                        <p><br></p>
                     </div>
                     <button onclick="editSave(event)" id="save-edit">Salvar</button>
                     <button onclick="editCancel(event)" id="cancel-edit">Cancelar</button>
@@ -32,70 +75,120 @@
         </div>
     </div>
 </div>
+<script src="../script/multiselect.js"></script>
 <script>
-    
-    let description = document.querySelector('.markeddown');
+    let overlay = document.getElementById('task-edit');
+    let container = document.getElementById('edit-container');
+    let description = document.getElementById('description');
+    let title = document.getElementById('task-title');
     let textarea = document.querySelector('.fake-text-area');
-    let edit = document.querySelector('.description-edit');
+    let edit = document.getElementById('description-edit');
+    let edittitle = document.getElementById('title-edit');
     let edittextarea = document.getElementById('editor-textarea');
     let btnsave = document.getElementById('save-edit');
     let btncancel = document.getElementById('cancel-edit');
 
-    const emptyeditarea = `<p><span data-testid="placeholder-test-id" class="placeholder-decoration"
-                                contenteditable="false">Use atalhos de Marcação para formatar sua página enquanto
-                                digita, como * para listas, # para cabeçalhos e --- para uma regra
-                                horizontal.</span><br></p>`
+    const emptyeditarea = `<p><br></p>`
 
-    edit.style.visibility = "hidden";
+    container.classList.add('hide');
+    edit.classList.add('hide');
+    edittitle.classList.add('hide');
 
     if (description.textContent === "") {
-        description.style.visibility = "hidden";
-        textarea.style.visibility = "visible";
+        description.classList.add('hide');
+        textarea.classList.remove('hide');
     } else {
-        description.style.visibility = "visible";
-        textarea.style.visibility = "hidden";
+        description.classList.remove('hide');
+        textarea.classList.add('hide');
     }
 
-    textarea.addEventListener('click', function(e) {
+    textarea.addEventListener('click', function (e) {
         e.preventDefault();
-        textarea.style.visibility = "hidden";
-        description.style.visibility = "hidden";
-        edit.style.visibility = "visible";
+        description.classList.add('hide');
+        textarea.classList.add('hide');
+        edit.classList.remove('hide');
     });
 
-    description.addEventListener('click', function(e) {
+    description.addEventListener('click', function (e) {
         e.preventDefault();
-        textarea.style.visibility = "hidden";
-        description.style.visibility = "hidden";
-        edit.style.visibility = "visible";
+        description.classList.add('hide');
+        textarea.classList.add('hide');
+        edit.classList.remove('hide');
     });
 
-    edittextarea.addEventListener('')
+    title.addEventListener('click', function (e) {
+        e.preventDefault();
+        title.classList.add('hide');
+        edittitle.textContent = title.textContent;
+        edittitle.classList.remove('hide');
+        edittitle.focus();
+    });
+
+    edittextarea.addEventListener('keydown', function (e) {
+        const p = edittextarea.querySelector('p');
+        if (e.key === 'Backspace' && document.activeElement === edittextarea && p.innerHTML == `<br>` && edittextarea.childElementCount < 2) {
+            e.preventDefault();
+        }
+    });
+
+    edittitle.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && document.activeElement === edittitle) {
+            e.preventDefault();
+
+            if (!(/^\s*$/.test(edittitle.textContent))) {
+                title.textContent = edittitle.textContent.trim();
+                title.classList.remove('hide');
+                edittitle.classList.add('hide');
+            }
+        }
+    });
+
+    edittitle.addEventListener('focusout', function (e) {
+        if (!(/^\s*$/.test(edittitle.textContent))) {
+            title.textContent = edittitle.textContent.trim();
+            title.classList.remove('hide');
+            edittitle.classList.add('hide');
+        }
+    });
 
     function editSave(e) {
-        description.innerHTML = edittextarea.innerHTML;
-        textarea.style.visibility = "visible";
-        edit.style.visibility = "hidden";
+        const p = edittextarea.querySelector('p');
+        if (p.innerHTML == `<br>` && edittextarea.childElementCount < 2) { description.innerHTML = ''; } else { description.innerHTML = edittextarea.innerHTML; }
 
-        if (description.innerHTML !== ``) {
-            description.style.visibility = "visible";
-            textarea.style.visibility = "hidden";
+        textarea.classList.remove('hide');
+        edit.classList.add('hide');
+
+        if (description.innerHTML !== '') {
+            description.classList.remove('hide');
+            textarea.classList.add('hide');
         }
 
-        if (description.innerHTML === ``){
+        if (description.innerHTML === '') {
             edittextarea.innerHTML = emptyeditarea;
+            description.innerHTML = ``;
         } else {
             edittextarea.innerHTML = description.innerHTML;
         }
     }
 
     function editCancel(e) {
-        if (description.innerHTML === ``){
+        edit.classList.add('hide');
+        if (description.innerHTML === '') {
             edittextarea.innerHTML = emptyeditarea;
+            textarea.classList.remove('hide');
         } else {
             edittextarea.innerHTML = description.innerHTML;
+            description.classList.remove('hide');
         }
-        textarea.style.visibility = "visible";
-        edit.style.visibility = "hidden";
+    }
+
+    function openTaskEdit(){
+        overlay.setAttribute('task-id',  Math.floor(Math.random()*9999999999));
+        container.classList.remove('hide');
+    }
+
+    function closeTaskEdit(){
+        overlay.setAttribute('task-id', '');
+        container.classList.add('hide');
     }
 </script>
