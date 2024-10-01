@@ -5,22 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/tasks.css">
+    <link rel="stylesheet" href="style/multiselect.css">
     <link rel="icon" href="https://colegiosatelite.com.br/wp-content/uploads/2021/05/icon-1.png" sizes="192x192">
     <link rel="icon" href="https://colegiosatelite.com.br/wp-content/uploads/2021/05/icon-1.png" sizes="32x32">
     <link rel="apple-touch-icon" href="https://colegiosatelite.com.br/wp-content/uploads/2021/05/icon-1.png">
     <title>Central TI</title>
 </head>
 <body> 
+
     <iframe src="html/header.html" onload="this.insertAdjacentHTML('afterend', (this.contentDocument.body||this.contentDocument).innerHTML);this.remove()"></iframe>
 
-    <div class="container">
+    <div class="overlay-container" id="edit-container">
+        <div class="overlay task-edit" task-id="" id="task-edit">
+            <div class="title-container">
+                <div class="title-header">
+                    <button class="close-edit" onclick="closeTaskEdit()">X</button>
+                    <h3 id="task-title" class="task-title">Tarefa 1</h3>
+                    <h3 class="title-edit" id="title-edit" contenteditable="true"></h3>
+                </div> 
+                <div class="status-container">
+                    <label for="status">Status</label>
+                    <div class="custom-select">
+                        <select name="status" id="status">
+                            <option value="null">Status inválido</option>
+                            <option value="0">A fazer</option>
+                            <option value="1">Em andamento</option>
+                            <option value="2">Concluído</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="priority-container">
+                <div class="priority-header">
+                    <label for="priority">Prioridade</label>
+                    <div class="custom-select">
+                        <select name="priority" id="priority">
+                            <option value="null">Prioridade inválida</option>
+                            <option value="0">Alta</option>
+                            <option value="1">Média</option>
+                            <option value="2">Baixa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="assigned-container">
+                    <label for="assigned">Responsáveis</label>
+                    <select id="assigned" name="assigned" data-placeholder="Select assigned" multiple data-multi-select>
+                        <option value="105688030906263974529">Gustavo Martinez</option>
+                        <option value="105688030906263974528">Gustavo Martinez 2</option>
+                    </select>
+                </div>              
+            </div>
+    
+            <div class="description-container">
+                <div class="description">
+                    <div id="description" class="markeddown hide-on-edit"></div>
+    
+                    <a class="fake-text-area hide-on-edit" href="#">
+                        Adicione uma descrição à tarefa...
+                    </a>
+    
+                    <div class="description-edit" id="description-edit">
+                        <button class="bold" onclick="document.execCommand('bold');">B</button>
+                        <button class="italic" onclick="document.execCommand('italic')">I</button>
+                        <button class="strikeThrough" onclick="document.execCommand('strikeThrough')">S</button>
+                        <button class="underline" onclick="document.execCommand('underline')">U</button>
+                        <button class="sub-super-script" onclick="document.execCommand('subscript')">X<sub>2</sub></button>
+                        <button class="sub-super-script"
+                            onclick="document.execCommand('superscript')">X<sup>2</sup></button>
+                        <button class="unordered-list" onclick="document.execCommand('insertUnorderedList')">&bull;</button>
+                        <button class="ordered-list" onclick="document.execCommand('insertOrderedList')">1.</button>
+                        <div class="edit-content"
+                            aria-label="Área de conteúdo principal, comece a digitar para inserir texto."
+                            aria-multiline="true" role="textbox" id="editor-textarea" contenteditable="true" translate="no">
+                            <p><br></p>
+                        </div>
+                        <button onclick="editSave(event)" id="save-edit">Salvar</button>
+                        <button onclick="editCancel(event)" id="cancel-edit">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">    
 
         <aside>
             <div id="side-content"></div>
         </aside>
     
         <main>
-            
+
             <section id="login" class="auth-buttons">
                 <button id="authorize_button" onclick="authorizeForm(onLogin, onLoginError)">Login</button>
                 <button id="signout_button" onclick="handleSignoutClick(onLogout)" hidden>Logout</button>
@@ -39,5 +114,7 @@
     <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
     <script type="text/javascript" src="script/app.js"></script>
     <script type="text/javascript" src="script/task.js"></script>
+    <script type="text/javascript" src="script/multiselect.js"></script>
+    <script type="text/javascript" src="script/taskedit.js"></script>
 </body>
 </html>

@@ -124,3 +124,69 @@ p.task-priority {
     font-size: 1rem;
     color: var(--bright-green);
 }
+
+.edit-content:has(p:only-child > br)::before {
+    content: "Use atalhos de Marcação para formatar sua página enquanto digita, como * para listas, # para cabeçalhos e --- para uma regra horizontal.";
+    pointer-events: none;
+    user-select: none;
+}
+
+.hide {
+    display: none;
+}
+
+.overlay-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--black);
+}
+
+.overlay {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 100%;
+    width: max-content;
+    padding: 10px;
+    border: solid var(--white) 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.title-container, .priority-container {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+.title-edit {
+    border: 4px solid var(--white);
+    padding: 5px;
+    flex-grow: 1;
+}
+
+.task-title {
+    padding: 9px;
+    flex-grow: 1;
+}
+
+.title-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    justify-content: stretch;
+}
+
+.close-edit {
+    height: 39px;
+    width: 39px;
+    font-size: 20px;
+    border: solid 4px var(--white);
+    background-color: var(--black);
+    color: var(--white);
+    text-align: center;
+}

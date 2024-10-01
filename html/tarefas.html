@@ -3,7 +3,7 @@
     <section class="board" ondrop="dropTask(event)" ondragover="allowDrop(event)" ondragenter="enterDropZone(event)" ondragleave="leaveDropZone(event)" status="0">
         <p class="board-status">A fazer</p>
 
-        <div id="task-0" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" class="task" priority="0">
+        <div id="task-0" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" class="task" priority="0" onclick="openTaskEdit(0)">
             <p class="task-title">Título da tarefa</p>
             <p class="task-description">Descrição da tarefaaaaaaaaaaaaaaa</p>
             <p class="task-priority">Prioridade: Alta</p>
@@ -13,7 +13,7 @@
 
     <section class="board" ondrop="dropTask(event)" ondragover="allowDrop(event)" ondragenter="enterDropZone(event)" ondragleave="leaveDropZone(event)" status="1">
         <p class="board-status">Em andamento</p>
-        <div id="task-1" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" class="task" priority="0">
+        <div id="task-1" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" class="task" priority="0" onclick="openTaskEdit(1)">
             <p class="task-title">Título da tarefa</p>
             <p class="task-description">Descrição da tarefaaaaaaaaaaaaaaa</p>
             <p class="task-priority">Prioridade: Alta</p>
@@ -22,7 +22,7 @@
 
     <section class="board" ondrop="dropTask(event)" ondragover="allowDrop(event)" ondragenter="enterDropZone(event)" ondragleave="leaveDropZone(event)" status="2">
         <p class="board-status">Concluído</p>
-        <div id="task-2" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" class="task" priority="0">
+        <div id="task-2" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" class="task" priority="0" onclick="openTaskEdit(2)">
             <p class="task-title">Título da tarefa</p>
             <p class="task-description">Descrição da tarefaaaaaaaaaaaaaaa</p>
             <p class="task-priority">Prioridade: Alta</p>
