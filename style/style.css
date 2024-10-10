@@ -140,8 +140,6 @@ h3 {
     justify-content: center;
     align-items: center;
     gap: 20px;
-
-    max-height: 70vh;
 }
 
 #content section .text {
@@ -199,6 +197,69 @@ aside {
     color: var(--bright-white);
     border: var(--bright-white) solid 4px;
     box-shadow: 0 0 15px var(--cyan);
+}
+
+.task-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.task {
+    border: var(--white) solid 4px;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.task h3 {
+    font-size: 1.3rem;
+    color: var(--white);
+}
+
+p.task-status {
+    margin-bottom: 10px;
+}
+
+.task[status="0"] p.task-status {
+    font-size: 1rem;
+    color: var(--bright-red);
+}
+
+.task[status="1"] p.task-status {
+    font-size: 1rem;
+    color: var(--bright-yellow);
+}
+
+.task[status="2"] p.task-status {
+    font-size: 1rem;
+    color: var(--bright-green);
+}
+
+.task[priority="4"] span.task-priority {
+    font-size: 1rem;
+    color: var(--green);
+}
+
+.task[priority="3"] span.task-priority {
+    font-size: 1rem;
+    color: var(--yellow);
+}
+
+.task[priority="2"] span.task-priority {
+    font-size: 1rem;
+    color: var(--red);
+}
+
+.task[priority="1"] span.task-priority {
+    font-size: 1rem;
+    color: var(--purple);
+}
+
+.task:hover {
+    border: var(--bright-white) solid 4px;
+    box-shadow: 0 0 10px var(--cyan);
 }
 
 footer {
