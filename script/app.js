@@ -21,7 +21,16 @@ async function fetchClickUpTasks() {
 function displayTasks(tasks, element) {
     element.innerHTML = ''; // Limpar conteúdo anterior
 
-    tasks.forEach(task => {
+    tasks.filter(task => {
+        var assignees = task.assignees
+            .filter(({ username }) => username !== "") // Filtra os assignees que têm username não nulo
+            .map(({ username }) => username);
+        var names = [];
+        assignees.forEach(name => name.indexOf(' ') > -1 ? names.push(name.substring(0, name.indexOf(' '))) : names.push(name));
+
+        console.log(names, names.length, user);
+        return names.includes(user) || names.length < 1;
+    }).sort((a, b) => Number(a.priority.id) - Number(b.priority.id)).forEach(task => {
         const taskElement = document.createElement('div');
         taskElement.classList.add('task');
 
@@ -44,17 +53,18 @@ function displayTasks(tasks, element) {
         }
 
         var assignees = task.assignees
-            .filter(({ username }) => username) // Filtra os assignees que têm username não nulo
+            .filter(({ username }) => username !== "") // Filtra os assignees que têm username não nulo
             .map(({ username }) => username);
         var names = [];
-        assignees.forEach(name => names.push(name.substring(0, name.indexOf(' '))));
+        assignees.forEach(name => name.indexOf(' ') > -1 ? names.push(name.substring(0, name.indexOf(' '))) : names.push(name));
 
-        console.log(assignees, names);
+        console.log(task.name, task.due_date);
 
         taskElement.innerHTML = `<h3>${task.name}</h3>
         <p class="task-status">${task.status.status.charAt(0).toUpperCase() + task.status.status.slice(1)}</p>
         <p class="task-property">Prioridade: <span class="task-priority">${priorityString}</span></p>
-        ${names.length > 0 ? `<p class="task-property">Responsáveis: ${names.join(', ')}</p>`: ``}`;
+        ${assignees.length > 0 ? `<p class="task-property">Responsáveis: ${names.join(', ')}</p>`: ``}
+        ${task.due_date ? `<p class="task-property">Data: ${new Date(Number(task.due_date)).toLocaleDateString()}</p>`: ``}`;
 
         var status;
         switch (task.status.id) {
@@ -79,7 +89,16 @@ function displayTasks(tasks, element) {
 
 function getTaskAmount(element) {
     fetchClickUpTasks().then(tasks => {
-        tasks = tasks.filter(task => task.status.id !== 'sc901105559393_soGxgYLh');
+        tasks = tasks.filter(task => task.status.id !== 'sc901105559393_soGxgYLh').filter(task => {
+            var assignees = task.assignees
+                .filter(({ username }) => username !== "") // Filtra os assignees que têm username não nulo
+                .map(({ username }) => username);
+            var names = [];
+            assignees.forEach(name => name.indexOf(' ') > -1 ? names.push(name.substring(0, name.indexOf(' '))) : names.push(name));
+    
+            console.log(names, names.length, user);
+            return names.includes(user) || names.length < 1;
+        });
         console.log(tasks);
         element.innerHTML = `${tasks.length}`;
     }).catch(error => {
@@ -101,7 +120,7 @@ function getTasks(element) {
 
 function onLogin() {
     var content = document.getElementById('content');
-    content.innerHTML = `<iframe src="html/inicio.html" onload="this.insertAdjacentHTML('afterend', (this.contentDocument.body||this.contentDocument).innerHTML);this.remove();welcome();getTaskAmount(document.getElementById('tasks-amount'));getTasks(document.getElementById('tasks'))"></iframe>`;
+    content.innerHTML = `<iframe src="html/inicio.html" onload="this.insertAdjacentHTML('afterend', (this.contentDocument.body||this.contentDocument).innerHTML);this.remove();welcome();"></iframe>`;
 
 }
 
@@ -121,7 +140,10 @@ function welcome() {
             personFields: "names"
         }).then((response) => {
             document.getElementById('user').textContent = `Olá, ${response.result.names[0].givenName}!`;
-        }, (error) => {
+            user = response.result.names[0].givenName;
+            getTasks(document.getElementById('tasks'));
+            getTaskAmount(document.getElementById('tasks-amount'));
+        }).catch((error) => {
             console.error('Error on info get', error);
         });
     });
