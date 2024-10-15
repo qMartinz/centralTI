@@ -143,6 +143,13 @@ function welcome() {
             user = response.result.names[0].givenName;
             getTasks(document.getElementById('tasks'));
             getTaskAmount(document.getElementById('tasks-amount'));
+            document.getElementById('side-content').hidden = false;
+            gapi.client.sheets.spreadsheets.values.get({
+                spreadsheetId: '1C7Gg6vy9G0ZYQWYzI51orZpFcrI3QVHeXBXKN2VokaE',
+                range: 'B2'
+            }).then(function (response) {
+                document.getElementById('qotd').innerHTML = `${response.result.values[0][0]}`;
+            });
         }).catch((error) => {
             console.error('Error on info get', error);
         });

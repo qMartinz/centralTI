@@ -52,12 +52,11 @@ body {
 
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     color: var(--bright-white);
     margin: 0;
-    flex-basis: 50px;
-    flex: 2;
+    flex: 1;
     font-family: 'Public Pixel', sans-serif;
     padding: 10px;
 
@@ -69,29 +68,7 @@ header h1 {
     color: var(--bright-text);
     font-family: 'Command';
     text-shadow: 0 0 14px var(--cyan);
-    font-size: 3.5rem;
-}
-
-header nav {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    row-gap: 0px;
-}
-
-header nav a {
-    color: var(--white);
-    transition: text-shadow 0.2s ease-out, color 0.2s ease-out;
-    font-family: 'Command';
-    font-size: 1.8rem;
-}
-
-header nav a:hover {
-    color: var(--bright-text);
-    text-shadow: 0 0 14px var(--cyan);
+    font-size: 2.5rem;
 }
 
 .container {
@@ -110,6 +87,7 @@ main {
     align-items: center;
     gap: 20px;
     flex: 7;
+    padding: 15px;
 }
 
 h2 {
@@ -173,6 +151,39 @@ aside {
     align-items: center;
     overflow-y: auto;
     gap: 20px;
+    padding: 15px;
+    max-width: 18%;
+}
+
+aside div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+aside section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: var(--white) solid 4px;
+    padding: 10px;
+    text-align: center;
+}
+
+aside section .qotd {
+    text-align: center;
+    text-wrap: wrap;
+}
+
+aside a {
+    color: var(--white);
+    transition: text-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+    text-decoration: underline;
+}
+
+aside a:hover {
+    text-shadow: 0 0 15px var(--cyan);
+    color: var(--bright-white);
 }
 
 .auth-buttons {
@@ -269,15 +280,14 @@ footer {
     align-items: center;
     border-top: var(--white) solid 4px;
     color: var(--white);
-    flex-basis: 50px;
-    padding: 10px;
+    padding: 5px;
     flex: 1;
     z-index: 99;
 }
 
 footer p {
     font-family: 'Command';
-    font-size: 1.4rem;
+    font-size: 1rem;
     text-align: center;
 }
 
@@ -336,4 +346,8 @@ footer a:hover {
     footer p {
         font-size: 0.7rem;
     }
+}
+
+*[hidden] {
+    display: none;
 }
