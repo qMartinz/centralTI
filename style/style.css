@@ -35,7 +35,6 @@
     border: none;
     outline: none;
     text-decoration: none;
-    list-style: none;
     font-family: 'Command';
 }
 
@@ -78,6 +77,7 @@ header h1 {
     align-items: center;
     overflow-y: auto;
     flex: 14;
+    width: 100%;
 }
 
 main {
@@ -88,6 +88,7 @@ main {
     gap: 20px;
     flex: 7;
     padding: 15px;
+    max-width: 70%;
 }
 
 h2 {
@@ -108,6 +109,7 @@ h3 {
     flex-direction: column;
     overflow-y: auto;
     max-height: 50vh;
+    width: 100%;
 }
 
 .content-container {
@@ -118,6 +120,7 @@ h3 {
     justify-content: center;
     align-items: center;
     gap: 20px;
+    width: 100%;
 }
 
 #content section .text {
@@ -271,6 +274,217 @@ p.task-status {
 .task:hover {
     border: var(--bright-white) solid 4px;
     box-shadow: 0 0 10px var(--cyan);
+}
+
+.agendamentos {
+    width: 100%;
+}
+
+.agendamentos table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-collapse: collapse;
+    border: var(--white) solid 2px;
+    text-align: center;
+}
+
+.agendamentos table tr {
+    background-color: var(--black);
+    color: white;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+}
+.agendamentos table tr td {
+    padding: 5px;
+    min-width: calc(50px);
+}
+
+.agendamentos table tr:first-child td {
+    border: var(--white) solid 2px;
+    border-top: 0;
+}
+
+.agendamentos table tr:first-child td:last-child {
+    border-right: 0;
+}
+
+.agendamentos table tr:first-child td:first-child {
+    border-left: 0;
+}
+
+#content section .agendamentos table tr td button {
+    border: var(--white) solid 2px;
+    font-size: 1rem;
+}
+
+#listaChromes{
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.473);
+}
+
+#listaChromes div {
+    background-color: var(--black);
+    width: max-content;
+    padding: 40px;
+    padding-bottom: 50px;
+    border: var(--white) solid 4px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--white);
+}
+
+#listaChromes div ul {
+    text-align: center;
+    margin: auto;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    list-style-type: decimal;
+    color: var(--white);
+    column-count: 3;
+    column-gap: 45px;
+}
+
+#listaChromes div ul li{
+    padding: 5px;
+}
+
+#listaChromes div ul li::marker {
+    font-size: 12px;
+}
+
+#listaChromes div button {
+    background-color: var(--black);
+    border: var(--white) solid 2px;
+    padding: 5px  20px 5px 20px;
+    width: max-content;
+    color: var(--white);
+    font-size: 1.2rem;
+    text-align: center;
+    transition: border 0.2s ease-in-out, color 0.2s ease-in-out, text-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#listaChromes div button:hover {
+    text-shadow: 0 0 15px var(--cyan);
+    color: var(--bright-white);
+    border: var(--bright-white) solid 2px;
+    box-shadow: 0 0 15px var(--cyan);
+}
+
+#devolucaoform-wrapper {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.544);
+}
+
+#devolucaoform, #success {
+    background-color: var(--black);
+    width: max-content;
+    padding: 20px;
+    border: var(--white) solid 4px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#loading {
+    background-color: var(--black);
+    width: max-content;
+    padding: 40px;
+    padding-bottom: 50px;
+    border: var(--white) solid 4px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#loading span {
+    color: var(--white);
+    animation: blinker 2s linear infinite;
+    text-align: center;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+#devolucaoform button, #success button {
+    background-color: var(--black);
+    border: var(--white) solid 2px;
+    padding: 5px  20px 5px 20px;
+    width: max-content;
+    color: var(--white);
+    font-size: 1.2rem;
+    text-align: center;
+    transition: border 0.2s ease-in-out, color 0.2s ease-in-out, text-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer;
+    display: block;
+    left: 50%;
+    transform: translate(-50%, 0);
+    position: relative;
+    margin-top: 10px;
+}
+
+#devolucaoform button:hover, #success button:hover {
+    text-shadow: 0 0 15px var(--cyan);
+    color: var(--bright-white);
+    border: var(--bright-white) solid 2px;
+    box-shadow: 0 0 15px var(--cyan);
+}
+
+#devolucaoform input {
+    border: 2px solid var(--white);
+    transition: border 0.2s ease-in-out, color 0.2s ease-in-out, text-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    padding: 4px;
+    width: 500px;
+    text-align: center;
+    background-color: transparent;
+    color: var(--white);
+}
+
+#devolucaoform input::placeholder {
+    color: var(--white);
+    opacity: 50%;
+}
+
+#devolucaoform input:hover {
+    text-shadow: 0 0 15px var(--cyan);
+    color: var(--bright-white);
+    border: var(--bright-white) solid 2px;
+    box-shadow: 0 0 15px var(--cyan);
+}
+
+#devolucaoform input:focus {
+    text-shadow: 0 0 15px var(--cyan);
+    color: var(--bright-white);
+    border: var(--bright-white) solid 2px;
+    box-shadow: 0 0 15px var(--cyan);
+    outline: none;
 }
 
 footer {
