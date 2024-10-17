@@ -511,6 +511,7 @@ async function addToArchive(agendamento) {
             agendamentos = getAgendamentos(agndmnts).filter(agend => (getStatus(agend.emprestimohora, agend.devolucaohora, agend.devolvido) == 2 || new Date(agend.emprestimohora).getDate() == new Date().getDate()) && !agend.devolvido);
 
             appointmentTableCreate();
+            document.getElementById('appointments-amount').innerHTML = `${agendamentos.length}`;
         });
 
         document.getElementById('loading').hidden = true;
