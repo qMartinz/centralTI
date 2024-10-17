@@ -455,8 +455,8 @@ async function registerReturn(id) {
     } catch (err) {
         console.error('Erro ao adicionar dados:', err);
     }
-    addToArchive(agendamentos.find(a => a.id == id));
     document.getElementById('loading').hidden = false;
+    addToArchive(agendamentos.find(a => a.id == id));
 }
 
 /**
