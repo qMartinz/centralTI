@@ -273,6 +273,8 @@ function welcome() {
             });
 
             document.getElementById('appointments-amount').innerHTML = `${agendamentos.length}`;
+
+            setCustomSelect();
         }).catch((error) => {
             console.error('Error on info get', error);
         });

@@ -1,0 +1,103 @@
+/* The container must be positioned relative: */
+.custom-select {
+    position: relative;
+    font-family: Arial;
+    border: var(--white) solid 2px;
+    transition: border 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.custom-select:hover {
+    border: var(--bright-white) solid 2px;
+    box-shadow: 0 0 10px var(--cyan);
+}
+
+.custom-select select {
+    display: none;
+    /*hide original SELECT element: */
+}
+
+.select-selected {
+    background: none;
+    color: var(--white);
+    font-family: 'Jersey 10';
+    font-size: 1.3rem;
+    transition: border 0.2s ease-in-out, color 0.2s ease-in-out, text-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: var(--white) transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent var(--white) transparent;
+    top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,
+.select-selected {
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+    font-family: 'Command';
+}
+
+/* Style items (options): */
+.select-items {
+    position: absolute;
+    background-color: var(--black);
+    border: var(--white) 2px solid;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+
+    max-height: 15rem;
+    overflow-y: auto;
+}
+
+.select-items div {
+    font-size: 1.3rem;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+    background-color: #000000;
+    text-shadow: 0 0 15px var(--cyan);
+    color: var(--bright-white);
+}
+
+.same-as-selected {
+    color: var(--white);
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-label {
+    text-align: center;
+}
