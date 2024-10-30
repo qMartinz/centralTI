@@ -66,8 +66,11 @@ tokenClient.callback = async (resp) => {
     if (resp.error !== undefined) {
         reject(resp);
     }
+
     document.getElementById('authorize_button').textContent = 'Relogar';
     document.getElementById('signout_button').hidden = false;
+
+    window.sessionStorage.setItem("access_token", gapi.client.getToken().access_token);
     resolve();
 };
 
@@ -91,6 +94,7 @@ if (gapi.client.getToken() === null) {
 function handleSignoutClick(onLogout) {
     const token = gapi.client.getToken();
     if (token !== null) {
+        sessionStorage.removeItem("access_token");
         google.accounts.oauth2.revoke(token.access_token);
         gapi.client.setToken('');
         document.getElementById('signout_button').hidden = true;

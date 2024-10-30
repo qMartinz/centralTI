@@ -6,6 +6,21 @@ const API_TOKEN = 'pk_75583978_2TF3DEM16IX8LW2CXX368H1M8NYYHD2S';
 // ID da lista do ClickUp que você quer obter tarefas
 const LIST_ID = '901105559393';
 
+window.addEventListener('load', function () {
+    gapi.load('client', function () {
+        gapi.client.init({}).then(function () {
+            fetch("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + window.sessionStorage.getItem("access_token")).then(function (response) {
+                if (response.ok) {
+                    gapi.client.setToken({ access_token: window.sessionStorage.getItem("access_token") });
+                    document.getElementById('authorize_button').textContent = 'Relogar';
+                    document.getElementById('signout_button').hidden = false;
+                    onLogin();
+                }
+            });
+        });
+    });
+});
+
 function getAgendamentos(agendamentosData) {
     let agndmnts = [];
     for (id = 0; id < agendamentosData.length; id++) {
@@ -289,15 +304,15 @@ function initPage() {
     })}.`;
 }
 
-function changeSetor(setor){
-    gapi.client.load('sheets', 'v4', function() {
+function changeSetor(setor) {
+    gapi.client.load('sheets', 'v4', function () {
         gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: '1VNOx2dAiFEhxrO2bofBCyr6Qs-BVBc7dyV0SuGzXDbU',
             range: 'filteredvalues!A2:E',
             majorDimension: 'COLUMNS'
         }).then((response) => {
             const rowData = response.result.values[setor - 1];
-            
+
             document.getElementById('dispositivo').innerHTML = `<option value="0">Selecione</option>`;
 
             rowData.forEach(value => {
@@ -306,7 +321,7 @@ function changeSetor(setor){
                 option.textContent = value;
                 document.getElementById('dispositivo').append(option);
             });
-    
+
             document.getElementById('dispositivo').parentElement.classList.remove('disabled');
             setCustomSelect();
         }, (error) => {
@@ -315,8 +330,8 @@ function changeSetor(setor){
     });
 }
 
-function changeDispositivo(dispositivo){
-    gapi.client.load('sheets', 'v4', function() {
+function changeDispositivo(dispositivo) {
+    gapi.client.load('sheets', 'v4', function () {
         gapi.client.sheets.spreadsheets.get({
             spreadsheetId: '1VNOx2dAiFEhxrO2bofBCyr6Qs-BVBc7dyV0SuGzXDbU',
             ranges: 'ids',
@@ -569,7 +584,7 @@ async function addToArchive(agendamento) {
     }
 }
 
-async function closeLoading(){
+async function closeLoading() {
     document.getElementById("devolucaoform-wrapper").hidden = true;
     document.getElementById("devolucaoform").hidden = false;
     document.getElementById("success").hidden = true;
