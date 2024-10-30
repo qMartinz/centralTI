@@ -101,3 +101,8 @@
 .text-label {
     text-align: center;
 }
+
+.custom-select.disabled {
+    opacity: 40%;
+    pointer-events: none;
+}

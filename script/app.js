@@ -229,7 +229,7 @@ function getTasks(element) {
 
 function onLogin() {
     var content = document.getElementById('content');
-    content.innerHTML = `<iframe src="html/inicio.html" onload="this.insertAdjacentHTML('afterend', (this.contentDocument.body||this.contentDocument).innerHTML);this.remove();welcome();"></iframe>`;
+    content.innerHTML = `<iframe src="html/inicio.html" onload="this.insertAdjacentHTML('afterend', (this.contentDocument.body||this.contentDocument).innerHTML);this.remove();initPage();"></iframe>`;
 
 }
 
@@ -242,7 +242,7 @@ function onLogout() {
     content.innerHTML = '';
 }
 
-function welcome() {
+function initPage() {
     gapi.client.load('people', 'v1', function () {
         gapi.client.people.people.get({
             resourceName: "people/me",
@@ -275,6 +275,7 @@ function welcome() {
             document.getElementById('appointments-amount').innerHTML = `${agendamentos.length}`;
 
             setCustomSelect();
+
         }).catch((error) => {
             console.error('Error on info get', error);
         });
@@ -286,6 +287,53 @@ function welcome() {
         month: 'long',
         day: 'numeric',
     })}.`;
+}
+
+function changeSetor(setor){
+    gapi.client.load('sheets', 'v4', function() {
+        gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: '1VNOx2dAiFEhxrO2bofBCyr6Qs-BVBc7dyV0SuGzXDbU',
+            range: 'filteredvalues!A2:E',
+            majorDimension: 'COLUMNS'
+        }).then((response) => {
+            const rowData = response.result.values[setor - 1];
+            
+            document.getElementById('dispositivo').innerHTML = `<option value="0">Selecione</option>`;
+
+            rowData.forEach(value => {
+                var option = document.createElement('option');
+                option.value = value;
+                option.textContent = value;
+                document.getElementById('dispositivo').append(option);
+            });
+    
+            document.getElementById('dispositivo').parentElement.classList.remove('disabled');
+            setCustomSelect();
+        }, (error) => {
+            console.error('Error on spreadsheet get', error);
+        });
+    });
+}
+
+function changeDispositivo(dispositivo){
+    gapi.client.load('sheets', 'v4', function() {
+        gapi.client.sheets.spreadsheets.get({
+            spreadsheetId: '1VNOx2dAiFEhxrO2bofBCyr6Qs-BVBc7dyV0SuGzXDbU',
+            ranges: 'ids',
+            includeGridData: true
+        }).then((response) => {
+            const dispositivoId = response.result.sheets[0].data[0].rowData.find(value => value.values[0].formattedValue === dispositivo).values[1].formattedValue;
+
+            gapi.client.sheets.spreadsheets.get({
+                spreadsheetId: dispositivoId,
+                ranges: 'A:Z'
+            }).then((response) => {
+                document.getElementById('iframe').innerHTML = `<iframe src="${response.result.spreadsheetUrl}"></iframe>`
+            })
+        }, (error) => {
+            console.error('Error on spreadsheet get', error);
+        });
+    });
 }
 
 function changeContent(src) {

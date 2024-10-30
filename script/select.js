@@ -46,13 +46,13 @@ function setCustomSelect() {
             }
 
             switch (s.id) {
-                case "cs":
-                    changeComputer(s);
-                    break;
-                case "setor":
-                    changeSetor(s);
-                    break;
-              }
+              case "dispositivo":
+                  changeDispositivo(s.value);
+                  break;
+              case "setor":
+                  changeSetor(s.value);
+                  break;
+            }
 
             h.click();
         });
