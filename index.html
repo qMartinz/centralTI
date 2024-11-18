@@ -38,35 +38,9 @@
         </div>
     </div>
 
-    <div class="container">    
+    <main id="content">
 
-        <aside>
-            <div id="side-content" hidden>
-                <section>
-                    <h3>Links Úteis</h3>
-                    <a href="https://colegiosatelite.com.br/agendamento/ti/formatacao">Formatação</a>
-                    <a href="https://www.classapp.com.br/">ClassApp</a>
-                </section>
-
-                <section>
-                    <h3>Mensagem do Dia</h3>
-                    <p class="qotd" id="qotd"></p>
-                </section>
-            </div>
-        </aside>
-    
-        <main>
-
-            <section id="login" class="auth-buttons">
-                <button id="authorize_button" onclick="authorizeForm(onLogin, onLoginError)">Login</button>
-                <button id="signout_button" onclick="handleSignoutClick(onLogout)" hidden>Logout</button>
-            </section>
-    
-            <div id="content"></div>
-
-        </main>
-
-    </div>
+    </main>
 
     <iframe src="html/footer.html" onload="this.insertAdjacentHTML('afterend', (this.contentDocument.body||this.contentDocument).innerHTML);this.remove()"></iframe>
 

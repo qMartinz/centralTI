@@ -1,5 +1,5 @@
-const CLIENT_ID = '724174214980-3dm3l4fah5kbi5670fp53rn0rcqqtf5f.apps.googleusercontent.com';
-const API_KEY = 'AIzaSyDhpSghX25j4I771ylBVisI31nX5FWe3eA';
+const CLIENT_ID = '227047110436-kqjeab0uska8h0jbih1r2mdk2g2lbno1.apps.googleusercontent.com';
+const API_KEY = 'AIzaSyCnSqTFY_6xJ20iLOhBjramUbcBAOw8LOY';
 
 // Discovery doc URL for APIs used by the quickstart
 const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
@@ -70,7 +70,7 @@ tokenClient.callback = async (resp) => {
     document.getElementById('authorize_button').textContent = 'Relogar';
     document.getElementById('signout_button').hidden = false;
 
-    window.sessionStorage.setItem("access_token", gapi.client.getToken().access_token);
+    window.localStorage.setItem("agendamentos_access_token", gapi.client.getToken().access_token);
     resolve();
 };
 
@@ -94,7 +94,7 @@ if (gapi.client.getToken() === null) {
 function handleSignoutClick(onLogout) {
     const token = gapi.client.getToken();
     if (token !== null) {
-        sessionStorage.removeItem("access_token");
+        localStorage.removeItem("agendamentos_access_token");
         google.accounts.oauth2.revoke(token.access_token);
         gapi.client.setToken('');
         document.getElementById('signout_button').hidden = true;

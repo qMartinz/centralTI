@@ -51,13 +51,12 @@ body {
 
 header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     color: var(--bright-white);
     margin: 0;
-    flex: 1;
     font-family: 'Public Pixel', sans-serif;
-    padding: 10px;
+    padding: 10px 20px 10px 20px;
 
     border-bottom: var(--white) solid 4px;
     z-index: 99;
@@ -67,7 +66,25 @@ header h1 {
     color: var(--bright-text);
     font-family: 'Command';
     text-shadow: 0 0 14px var(--cyan);
-    font-size: 2.5rem;
+    font-size: 2em;
+}
+
+header nav {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+header nav a {
+    color: var(--white);
+    text-decoration: underline;
+    font-size: 1.3rem;
+    transition: text-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+header nav a:hover {
+    text-shadow: 0 0 20px var(--cyan);
+    color: var(--bright-white);
 }
 
 .container {
@@ -82,13 +99,15 @@ header h1 {
 
 main {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: baseline;
     align-items: center;
-    gap: 20px;
     flex: 7;
     padding: 15px;
-    max-width: 70%;
+    max-height: 100%;
+    gap: 10px;
+    flex-direction: column;
+    overflow-y: auto;
+    width: 100%;
 }
 
 h2 {
@@ -100,26 +119,18 @@ h2 {
 h2 a { 
     color: var(--white);
     text-decoration: underline;
-    transition: text-shadow 0.2s ease-in-out;
+    transition: text-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 h2 a:hover {
     text-shadow: 0 0 20px var(--cyan);
+    color: var(--bright-white);
 }
 
 h3 {
     font-family: 'Command';
     font-size: 1.7rem;
     color: var(--white);
-}
-
-#content {
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-    overflow-y: auto;
-    max-height: 60vh;
-    width: 100%;
 }
 
 .content-container {
@@ -157,57 +168,14 @@ h3 {
     box-shadow: 0 0 15px var(--cyan);
 }
 
-aside {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow-y: auto;
-    gap: 20px;
-    padding: 15px;
-    max-width: 18%;
-}
-
-aside div {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-aside section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border: var(--white) solid 4px;
-    padding: 10px;
-    text-align: center;
-}
-
-aside section .qotd {
-    text-align: center;
-    text-wrap: wrap;
-}
-
-aside a {
-    color: var(--white);
-    transition: text-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
-    text-decoration: underline;
-}
-
-aside a:hover {
-    text-shadow: 0 0 15px var(--cyan);
-    color: var(--bright-white);
-}
-
 .auth-buttons {
     display: flex;
     gap: 30px;
-    padding: 1rem;
 }
 
 .auth-buttons button {
     padding: 10px;
-    font-size: 2rem;
+    font-size: 1.3rem;
     background: none;
     color: var(--white);
     border: var(--white) solid 4px;
@@ -501,11 +469,12 @@ p.task-status {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
 }
 
 #iframe iframe {
     width: 100%;
-    height: 450px;
+    height: 700px;
 }
 
 footer {
@@ -516,13 +485,13 @@ footer {
     border-top: var(--white) solid 4px;
     color: var(--white);
     padding: 5px;
-    flex: 1;
+    flex: 0;
     z-index: 99;
 }
 
 footer p {
     font-family: 'Command';
-    font-size: 1rem;
+    font-size: 0.6rem;
     text-align: center;
 }
 

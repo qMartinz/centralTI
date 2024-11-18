@@ -9,9 +9,9 @@ const LIST_ID = '901105559393';
 window.addEventListener('load', function () {
     gapi.load('client', function () {
         gapi.client.init({}).then(function () {
-            fetch("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + window.sessionStorage.getItem("access_token")).then(function (response) {
+            fetch("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + window.localStorage.getItem("agendamentos_access_token")).then(function (response) {
                 if (response.ok) {
-                    gapi.client.setToken({ access_token: window.sessionStorage.getItem("access_token") });
+                    gapi.client.setToken({ access_token: window.localStorage.getItem("agendamentos_access_token") });
                     document.getElementById('authorize_button').textContent = 'Relogar';
                     document.getElementById('signout_button').hidden = false;
                     onLogin();
@@ -267,7 +267,6 @@ function initPage() {
             user = response.result.names[0].givenName;
             getTasks(document.getElementById('tasks'));
             getTaskAmount(document.getElementById('tasks-amount'));
-            document.getElementById('side-content').hidden = false;
             gapi.client.sheets.spreadsheets.values.get({
                 spreadsheetId: '1C7Gg6vy9G0ZYQWYzI51orZpFcrI3QVHeXBXKN2VokaE',
                 range: 'B2'
