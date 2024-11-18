@@ -71,6 +71,7 @@ tokenClient.callback = async (resp) => {
     document.getElementById('signout_button').hidden = false;
 
     window.localStorage.setItem("agendamentos_access_token", gapi.client.getToken().access_token);
+    refreshAgendamentos();
     resolve();
 };
 

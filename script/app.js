@@ -15,6 +15,7 @@ window.addEventListener('load', function () {
                     document.getElementById('authorize_button').textContent = 'Relogar';
                     document.getElementById('signout_button').hidden = false;
                     onLogin();
+                    refreshAgendamentos();
                 }
             });
         });
@@ -588,4 +589,55 @@ async function closeLoading() {
     document.getElementById("devolucaoform").hidden = false;
     document.getElementById("success").hidden = true;
     document.querySelectorAll(".devolvido").forEach(btn => btn.disabled = false);
+}
+
+function signout() {
+    stopRefresh();
+    handleSignoutClick(onLogout);
+}
+
+// Variable to store the interval
+let intervalId;
+
+function refreshAgendamentos() {
+    // check if an interval has already been set up
+    if (!intervalId) {
+        intervalId = setInterval(refresh, 4000);
+    }
+}
+
+function refresh() {
+    // Check if access is valid
+    gapi.client.load('drive', 'v3', function () {
+        gapi.client.drive.about.get({
+            fields: "user"
+        }).then(async function (about) {
+            console.log("Refreshed");
+
+            await getSheetDataCallback("Agendamentos", (sheetData) => {
+                agndmnts = [];
+                for (var id = 0; id < sheetData.length; id++) {
+                    const element = sheetData[id];
+                    element.id = id;
+                    agndmnts.push(element);
+                }
+                agendamentos = getAgendamentos(agndmnts).filter(agend => (getStatus(agend.emprestimohora, agend.devolucaohora, agend.devolvido) == 2 || new Date(agend.emprestimohora).getDate() == new Date().getDate()) && !agend.devolvido);
+    
+                appointmentTableCreate();
+                document.getElementById('appointments-amount').innerHTML = `${agendamentos.length}`;
+            });
+
+        },
+            function (error) {
+                console.error("Login timed out", error);
+                handleSignoutClick(true);
+                stopRefresh();
+            });
+    });
+}
+
+function stopRefresh() {
+    clearInterval(intervalId);
+    // release our interval from the variable
+    intervalId = null;
 }
