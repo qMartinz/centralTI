@@ -1,4 +1,5 @@
-let user = "Guga";
+let user = "";
+let emails = [];
 let agendamentos = [];
 
 // Insira seu token de API do ClickUp aqui
@@ -147,14 +148,7 @@ function displayTasks(tasks, element) {
     element.innerHTML = ''; // Limpar conteúdo anterior
 
     tasks.filter(task => {
-        var assignees = task.assignees
-            .filter(({ username }) => username !== "") // Filtra os assignees que têm username não nulo
-            .map(({ username }) => username);
-        var names = [];
-        assignees.forEach(name => name.indexOf(' ') > -1 ? names.push(name.substring(0, name.indexOf(' '))) : names.push(name));
-
-        console.log(names, names.length, user);
-        return names.includes(user) || names.length < 1;
+        return task.assignees.some(assignee => emails.some(email => email.value == assignee.email)) || task.assignees.length <= 0;
     }).sort((a, b) => Number(a.priority.id) - Number(b.priority.id)).forEach(task => {
         const taskElement = document.createElement('div');
         taskElement.classList.add('task');
@@ -182,8 +176,6 @@ function displayTasks(tasks, element) {
             .map(({ username }) => username);
         var names = [];
         assignees.forEach(name => name.indexOf(' ') > -1 ? names.push(name.substring(0, name.indexOf(' '))) : names.push(name));
-
-        console.log(task.name, task.due_date);
 
         taskElement.innerHTML = `<h3>${task.name}</h3>
         <p class="task-status">${task.status.status.charAt(0).toUpperCase() + task.status.status.slice(1)}</p>
@@ -215,16 +207,8 @@ function displayTasks(tasks, element) {
 function getTaskAmount(element) {
     fetchClickUpTasks().then(tasks => {
         tasks = tasks.filter(task => task.status.id !== 'sc901105559393_soGxgYLh').filter(task => {
-            var assignees = task.assignees
-                .filter(({ username }) => username !== "") // Filtra os assignees que têm username não nulo
-                .map(({ username }) => username);
-            var names = [];
-            assignees.forEach(name => name.indexOf(' ') > -1 ? names.push(name.substring(0, name.indexOf(' '))) : names.push(name));
-
-            console.log(names, names.length, user);
-            return names.includes(user) || names.length < 1;
+            return task.assignees.some(assignee => emails.some(email => email.value == assignee.email)) || task.assignees.length <= 0;
         });
-        console.log(tasks);
         element.innerHTML = `${tasks.length}`;
     }).catch(error => {
         console.error('Erro ao buscar tarefas:', error);
@@ -262,10 +246,11 @@ function initPage() {
     gapi.client.load('people', 'v1', function () {
         gapi.client.people.people.get({
             resourceName: "people/me",
-            personFields: "names"
+            personFields: "names,emailAddresses"
         }).then(async (response) => {
             document.getElementById('user').textContent = `Olá, ${response.result.names[0].givenName}!`;
             user = response.result.names[0].givenName;
+            emails = response.result.emailAddresses;
             getTasks(document.getElementById('tasks'));
             getTaskAmount(document.getElementById('tasks-amount'));
             gapi.client.sheets.spreadsheets.values.get({
@@ -627,6 +612,8 @@ function refresh() {
                 document.getElementById('appointments-amount').innerHTML = `${agendamentos.length}`;
             });
 
+            getTasks(document.getElementById('tasks'));
+            getTaskAmount(document.getElementById('tasks-amount'));
         },
             function (error) {
                 console.error("Login timed out", error);
